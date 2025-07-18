@@ -24,10 +24,10 @@ files:
   #- path: .config/micro/bindings.json
 
   # For Rofi
-  - path: /usr/share/rofi/themes
+  - path: /usr/share/rofi
     source: git
-    url: https://github.com/newmanls/rofi-themes-collection
-    branch: master
+    url: https://github.com/davatorium/rofi
+    branch: next
   - path: scripts/cliphist
     source: git
     url: https://github.com/sentriz/cliphist
