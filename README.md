@@ -31,7 +31,7 @@ git clone https://github.com/sounddrill31/dotfiles; cd dotfiles
 ```
 
 ```bash
-python3 sync.sh
+python3 sync.py
 ```
 
 ### Choices
