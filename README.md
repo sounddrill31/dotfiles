@@ -1,5 +1,7 @@
 # dotfiles
-Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty by default
+Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty by default. 
+
+Yes, I use micro over nano, \*vi\*, emacs, etc.  
 
 
 > [!TIP]
