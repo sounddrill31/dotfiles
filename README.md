@@ -27,7 +27,7 @@ niri
 
 Python deps:
 ```
-GitPython: python3-gitpython
+GitPython: python3-GitPython
 ```
 
 ### Installation
