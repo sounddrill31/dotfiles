@@ -21,6 +21,7 @@ wl-paste
 nm-applet
 alacritty
 rofi
+wob
 niri
 ```
 
