@@ -35,10 +35,9 @@ files:
     branch: master
 
   # icons
-  - path: ~/.local/share/icons
+  - path: ~/.local/share/icons/BreezeX-RosePineDawn-Linux
     source: external
     type: tarxz
-    dir_name: BreezeX-RosePineDawn-Linux # ~/.local/share/icons/BreezeX-RosePineDawn-Linux
     url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
 
 #Example for External
