@@ -7,7 +7,7 @@
 
 environment {
     DISPLAY ":0"
-    WOBPIPE "/tmp/wobpipe"
+    WOBSOCK "/tmp/wobpipe"
 }
 
 // Input device configuration.
@@ -267,7 +267,8 @@ spawn-at-startup "waybar"
 
 //spawn-at-startup "swaybg" "-i" "~/Downloads/b227.jpg"// Wallpaper
 
-spawn-at-startup "bash" "-c" "mkfifo /tmp/wobpipe; tail -f /tmp/wobpipe | wob"
+spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /tmp/wobpipe | wob"
+
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
 
@@ -373,13 +374,10 @@ binds {
 //    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
 //    XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "5"; }
 //    XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "5"; }
-//    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-
-
-	XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-c" "pamixer -ui 2 && pamixer --get-volume > $WOBSOCK"; }
-	XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "pamixer -ud 2 && pamixer --get-volume > $WOBSOCK"; }
-	XF86AudioMute  allow-when-locked=true { spawn "bash" "-c" "pamixer --toggle-mute && ( [ '$(pamixer --get-mute)' = 'true' ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK"; }
-
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+	XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-c" "pamixer -ui 2; pamixer --get-volume > /tmp/wobpipe"; }
+	XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-c" "pamixer -ud 2 && pamixer --get-volume > /tmp/wobpipe"; }
+	
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+" ; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
