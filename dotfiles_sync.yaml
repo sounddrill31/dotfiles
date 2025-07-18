@@ -46,6 +46,11 @@ files:
     type: tarxz
     url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
 
+  # wob
+  - path: .config/wob
+    source: git
+    url: https://github.com/sounddrill31/wob
+
 #Example for External
 #  - path: .local/bin/custom-tool
 #    source: external
