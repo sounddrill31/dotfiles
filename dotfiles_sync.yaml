@@ -32,6 +32,7 @@ files:
   - path: .config/alacritty/themes
     source: git
     url: https://github.com/alacritty/alacritty-theme
+    branch: master
 
   # icons
   - path: ~/.local/share/icons
