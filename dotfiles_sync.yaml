@@ -10,11 +10,17 @@ files:
   # Niri
   - path: .config/niri/config.kdl
 
+  # GTK/Theming
+  - path: .config/gtk-3.0/settings.ini
+  - path: .config/gtk-4.0/settings.ini
+
+
   # Waybar
   - path: .config/waybar/config.jsonc   # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/waybar 
 
   # Micro Editor
   - path: .config/micro/settings.json
+  - path: .local/share/applications/micro.desktop
   #- path: .config/micro/bindings.json
 
   # For Rofi

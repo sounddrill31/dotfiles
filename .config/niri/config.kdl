@@ -391,7 +391,6 @@ binds {
 
     Mod+Left  { focus-column-left; }
     //Mod+Down  { focus-window-down; }
-    //Alt+Tab { spawn "bash" "/home/souhrud/scripts/cycle_windows_workspace.sh"; }
     Alt+Tab { focus-column-right; }
     //Mod+Tab { focus-column-right; }
     Mod+Tab repeat=true { toggle-overview; }
@@ -617,7 +616,6 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     Mod+V { spawn "bash" "-c" "rofi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme /usr/share/rofi/themes/DarkBlue.rasi"; }
-	Mod+S { spawn "x11-launcher" "--" "steam";}
 	Mod+Alt+T { spawn "telegram-desktop"; }
 	Mod+Alt+D { spawn "discord"; }
 	Mod+Alt+W { spawn "whatsapp"; }

@@ -1,10 +1,38 @@
 # dotfiles
 Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty by default
 
-Put wallpaper in ~/Pictures/Background.jpg (edit ~/.config/niri/config.kdl)
 
+> [!TIP]
+? Put wallpaper in ~/Pictures/Background.jpg (To change this, edit ~/.config/niri/config.kdl)
 
-Choices:
+### Required Packages
+
+Ensure the following commands are available on your system:
+
+```
+wpctl
+brightnessctl
+pamixer
+waybar
+swaybg
+wl-paste
+nm-applet
+alacritty
+rofi
+niri
+```
+
+### Installation
+
+```bash
+git clone https://github.com/sounddrill31/dotfiles; cd dotfiles
+```
+
+```bash
+python3 sync.sh
+```
+
+### Choices
 - OpenSUSE Tumbleweed
 - Niri
 - Waybar
