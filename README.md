@@ -24,6 +24,12 @@ rofi
 niri
 ```
 
+
+Python deps:
+```
+GitPython: python3-gitpython
+```
+
 ### Installation
 
 ```bash
