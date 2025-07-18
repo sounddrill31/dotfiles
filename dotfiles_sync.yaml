@@ -1,0 +1,47 @@
+# dotfiles_sync.yaml
+repo: https://github.com/sounddrill31/dotfiles
+branch: main
+
+# Paths start at ~ by default, unless it starts with /
+# Fetch from repo's raw files by default unless external or git is specified 
+
+files:
+
+  # Niri
+  - path: .config/niri/config.kdl
+
+  # Waybar
+  - path: .config/waybar/config.jsonc   # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/waybar 
+
+  # Micro Editor
+  - path: .config/micro/settings.json
+  #- path: .config/micro/bindings.json
+
+  # For Rofi
+  - path: /usr/share/rofi/themes
+    source: git
+    url: https://github.com/newmanls/rofi-themes-collection
+    branch: master
+  - path: scripts/cliphist
+    source: git
+    url: https://github.com/sentriz/cliphist
+    branch: master # main is default
+  
+  # Alacritty
+  - path: .config/alacritty/alacritty.toml
+  - path: .config/alacritty/themes
+    source: git
+    url: https://github.com/alacritty/alacritty-theme
+
+  # icons
+  - path: ~/.local/share/icons
+    source: external
+    type: tarxz
+    dir_name: BreezeX-RosePineDawn-Linux # ~/.local/share/icons/BreezeX-RosePineDawn-Linux
+    url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
+
+#Example for External
+#  - path: .local/bin/custom-tool
+#    source: external
+#    url: https://example.com/files/custom-tool-latest
+#    type: direct
