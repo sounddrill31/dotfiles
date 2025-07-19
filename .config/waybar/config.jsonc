@@ -39,7 +39,7 @@
     "custom/clipboard": {
         "format": "    ",  // Font Awesome icon
         "tooltip": "Clipboard manager",
-        "on-click": "bash -c 'rofi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme /usr/share/rofi/themes/DarkBlue.rasi'" 
+        "on-click": "bash -c 'rofi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme ~/sources/rofi/themes/DarkBlue.rasi'" 
     },
 
 	"custom/nowplaying": {
