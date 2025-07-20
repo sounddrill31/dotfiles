@@ -4,6 +4,7 @@ import shutil
 import requests
 import tarfile
 import yaml
+import stat
 from git import Repo, GitCommandError
 
 # ---- Helper functions ----
@@ -122,6 +123,17 @@ def main():
         else:
             ok, err = False, f"Unknown source: {source}"
             msg = f"FAILED: {err}"
+
+        if ok and entry.get("exec", False):
+            try:
+                # Add execute permissions for user, group, and others (like chmod +x)
+                current_st = os.stat(abs_path)
+                os.chmod(abs_path, current_st.st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+                msg += " (executable)"
+            except Exception as e:
+                # If chmod fails, mark the entire operation as a failure
+                ok = False
+                msg = f"FAILED: chmod failed - {e}"
 
         print_status(idx, total, path, "ok" if ok else "fail", msg)
         if ok:

@@ -14,6 +14,11 @@ files:
   - path: .config/gtk-3.0/settings.ini
   - path: .config/gtk-4.0/settings.ini
 
+  # Scripts
+  - path: .local/bin/markdown
+    exec: true
+  - path: .local/bin/extract-that
+    exec: true
 
   # Waybar
   - path: .config/waybar/config.jsonc   # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/waybar 
