@@ -55,7 +55,7 @@ def print_autostart_instructions(script_path):
 
 def fetch_raw_file(repo_url, branch, rel_path, dest):
     raw_base = repo_url.rstrip("/").replace("github.com/", "raw.githubusercontent.com/")
-    raw_url = f"{raw_base}/{branch}/{rel_path.lstrip('/')}"
+    raw_url = f"{raw_base}/{branch}/home/{rel_path.lstrip('/')}"
     try:
         r = requests.get(raw_url, timeout=20)
         r.raise_for_status()
