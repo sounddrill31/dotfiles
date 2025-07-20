@@ -52,4 +52,4 @@ done
 echo -e "${CYAN}>>> Using ${YELLOW}$TOOL${CYAN} to process markdown...${RESET}"
 
 # Run the tool passing all arguments
-"$TOOL" "${ARGS[@]}"
+$TOOL "${ARGS[@]}"

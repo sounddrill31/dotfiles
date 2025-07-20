@@ -39,7 +39,7 @@ GitPython: python3-GitPython
 ### Required for markdown script
 ```
 glow
-npm (preferably run `nvm use node` before starting)
+npm (preferably run `nvm use node` before starting) (nodejs-common on tumbleweed)
 ```
 ### Required for extract script
 ```
