@@ -1,2 +1,40 @@
 # put stuff here
 
+# -----------------------------------------------------------------------------
+# Marp Presentation Functions
+#
+# Provides convenient wrappers for creating and viewing Marp presentations.
+#
+# Usage:
+#   present <file.md>        - Host the presentation on a local web server.
+#   present-pdf <file.md>    - Generate a PDF from the markdown file.
+# -----------------------------------------------------------------------------
+
+# --- Helper function to check for Marp and file argument ---
+_present_check() {
+    # Check if a file argument was provided
+    if [[ -z "$1" ]]; then
+        echo -e "\033[1;31mUsage: $0 <markdown_file>\033[0m"
+        return 1
+    fi
+    return 0
+}
+
+# --- Main Functions ---
+
+# Serves the presentation on a local web server for viewing in a browser.
+
+present() {
+    _present_check "$1" || return 1
+    echo -e "\033[0;36m>>> Starting web server for \033[1;33m$1\033[0m..."
+    markdown --ppt -- --server --watch $(dirname $(realpath "$1"))    
+}
+
+# Directly generates a PDF from the markdown file without a preview.
+present-pdf() {
+    _present_check "$1" || return 1
+    echo -e "\033[0;36m>>> Generating PDF for \033[1;33m$1\033[0m..."
+    markdown --ppt -- --pdf "$1"
+    echo -e "\033[1;32m✅ PDF created successfully!\033[0m"
+}
+
