@@ -11,7 +11,7 @@ from git import Repo, GitCommandError
 
 def home_path(target_path):
     target_path = target_path.replace("~", os.path.expanduser("~"))
-    if target_path[0] != "/":
+    if not os.path.isabs(target_path):
         return os.path.join(os.path.expanduser("~"), target_path)
     return target_path
 
@@ -19,6 +19,39 @@ def print_status(idx, total, path, status, msg):
     percent = int(100 * (idx + 1) / total)
     color = {"ok": "\033[92m●\033[0m", "fail": "\033[91m✗\033[0m", "skip": "\033[94m◦\033[0m"}.get(status, "")
     print(f"{percent:3}% [{color}] {path} - {msg}")
+
+
+def check_if_sourced(script_path):
+    """Checks common shell rc files to see if a script is already sourced."""
+    home = os.path.expanduser("~")
+    shell_profiles = [".bashrc", ".zshrc", ".profile", ".bash_profile"]
+    for profile in shell_profiles:
+        profile_path = os.path.join(home, profile)
+        if os.path.exists(profile_path):
+            try:
+                with open(profile_path, "r") as f:
+                    for line in f:
+                        # Check for 'source /path/to/script' or '. /path/to/script'
+                        if script_path in line and ("source" in line or ". " in line):
+                            return True
+            except Exception:
+                continue  # Ignore files we can't read
+    return False
+
+
+def print_autostart_instructions(script_path):
+    """Prints instructions for the user to source the script."""
+    user_friendly_path = script_path.replace(os.path.expanduser("~"), "~")
+    YELLOW = "\033[1;33m"
+    CYAN = "\033[0;36m"
+    RESET = "\033[0m"
+    
+    print(f"\n{YELLOW}🔔 ACTION REQUIRED for {user_friendly_path}{RESET}")
+    print("   To enable autostart, run the following command:")
+    print(f"   {CYAN}echo 'source {user_friendly_path}' >> ~/.bashrc{RESET}")
+    print("   (Note: You may need to change '.bashrc' to '.zshrc' or your shell's equivalent)")
+    print("   Then, restart your shell or run the command manually to apply.")
+
 
 def fetch_raw_file(repo_url, branch, rel_path, dest):
     raw_base = repo_url.rstrip("/").replace("github.com/", "raw.githubusercontent.com/")
@@ -81,6 +114,7 @@ def fetch_from_external(entry, dest):
 
 # ---- Main logic ----
 
+
 def main():
     try:
         with open("dotfiles_sync.yaml") as f:
@@ -94,6 +128,7 @@ def main():
     files = config.get("files", [])
     total = len(files)
     ok_count = 0
+    autostart_instructions = []
 
     for idx, entry in enumerate(files):
         path = entry["path"]
@@ -101,45 +136,49 @@ def main():
         abs_path = home_path(path)
         # Remove if exists (unless it's git but same path)
         if source == "git":
-            if os.path.exists(abs_path):
-                shutil.rmtree(abs_path)
-        elif os.path.isdir(abs_path) or os.path.isfile(abs_path):
-            if os.path.isdir(abs_path):
+            if os.path.exists(abs_path): shutil.rmtree(abs_path)
+        elif os.path.lexists(abs_path): # Use lexists for symlinks
+            if os.path.isdir(abs_path) and not os.path.islink(abs_path):
                 shutil.rmtree(abs_path)
             else:
                 os.remove(abs_path)
 
         if source == "repo":
-            ok, err = fetch_raw_file(repo_url, branch, path.replace(os.path.expanduser("~") + "/", ""), abs_path)
+            repo_relative_path = path.replace("~/", "") # Assume paths are relative to home
+            ok, err = fetch_raw_file(repo_url, branch, repo_relative_path, abs_path)
             msg = "fetched from repo" if ok else f"FAILED: {err}"
         elif source == "git":
-            branch_override = entry.get("branch") or "main"
-            url = entry["url"]
-            ok, err = fetch_from_git(url, abs_path, branch_override)
-            msg = f"cloned {url}@{branch_override}" if ok else f"FAILED: {err}"
+            ok, err = fetch_from_git(entry["url"], abs_path, entry.get("branch", "main"))
+            msg = f"cloned {entry['url']}" if ok else f"FAILED: {err}"
         elif source == "external":
             ok, err = fetch_from_external(entry, abs_path)
             msg = f"downloaded {entry['url']}" if ok else f"FAILED: {err}"
         else:
-            ok, err = False, f"Unknown source: {source}"
-            msg = f"FAILED: {err}"
-
+            ok, err, msg = False, f"Unknown source: {source}", f"FAILED: Unknown source"
+        
         if ok and entry.get("exec", False):
             try:
-                # Add execute permissions for user, group, and others (like chmod +x)
-                current_st = os.stat(abs_path)
-                os.chmod(abs_path, current_st.st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+                st = os.stat(abs_path)
+                os.chmod(abs_path, st.st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
                 msg += " (executable)"
             except Exception as e:
-                # If chmod fails, mark the entire operation as a failure
-                ok = False
-                msg = f"FAILED: chmod failed - {e}"
+                ok, msg = False, f"FAILED: chmod failed - {e}"
 
         print_status(idx, total, path, "ok" if ok else "fail", msg)
         if ok:
             ok_count += 1
+            # --- New autostart check ---
+            if entry.get("autostart", False):
+                if not check_if_sourced(abs_path):
+                    autostart_instructions.append(abs_path)
 
-    print(f"\n\033[96mDone:\033[0m {ok_count}/{total} successful, {total-ok_count} failed.\n")
+    print(f"\n\033[96mDone:\033[0m {ok_count}/{total} successful, {total-ok_count} failed.")
+
+    # --- Print all autostart instructions at the end ---
+    if autostart_instructions:
+        for script_path in autostart_instructions:
+            print_autostart_instructions(script_path)
+        print()
 
 if __name__ == "__main__":
     main()

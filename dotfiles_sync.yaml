@@ -14,6 +14,11 @@ files:
   - path: .config/gtk-3.0/settings.ini
   - path: .config/gtk-4.0/settings.ini
 
+  # Autostart
+  - path: .customrc
+    exec: true
+    autostart: true
+
   # Scripts
   - path: .local/bin/markdown
     exec: true
