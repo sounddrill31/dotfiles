@@ -160,7 +160,7 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-charging": "",
+        "format-charging": "  {capacity}% ",
         "format-plugged": "",
         "format-alt": "{capacity}% {time}",
         "format-icons": ["", "", "", "", ""]
