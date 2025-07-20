@@ -22,20 +22,49 @@ def print_status(idx, total, path, status, msg):
 
 
 def check_if_sourced(script_path):
-    """Checks common shell rc files to see if a script is already sourced."""
+    """
+    Checks if the given script is sourced in common shell config files.
+    This is robust against different path formats (relative, absolute, ~),
+    symlinks, and comments.
+    """
+    # Get the absolute, canonical path of the script we are looking for.
+    canonical_target_path = os.path.realpath(os.path.expanduser(script_path))
+
     home = os.path.expanduser("~")
     shell_profiles = [".bashrc", ".zshrc", ".profile", ".bash_profile"]
-    for profile in shell_profiles:
-        profile_path = os.path.join(home, profile)
-        if os.path.exists(profile_path):
-            try:
-                with open(profile_path, "r") as f:
-                    for line in f:
-                        # Check for 'source /path/to/script' or '. /path/to/script'
-                        if script_path in line and ("source" in line or ". " in line):
-                            return True
-            except Exception:
-                continue  # Ignore files we can't read
+
+    for profile_name in shell_profiles:
+        profile_path = os.path.join(home, profile_name)
+        if not os.path.exists(profile_path):
+            continue
+
+        try:
+            with open(profile_path, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    # Ignore comments and empty lines
+                    if not line or line.startswith("#"):
+                        continue
+
+                    parts = line.split()
+                    # Check for 'source <path>' or '. <path>'
+                    if len(parts) >= 2 and (parts[0] == "source" or parts[0] == "."):
+                        path_from_file = parts[1]
+                        
+                        try:
+                            # Normalize the path found in the config file
+                            canonical_path_from_file = os.path.realpath(os.path.expanduser(path_from_file))
+                            
+                            # Compare the canonical paths
+                            if canonical_target_path == canonical_path_from_file:
+                                return True
+                        except FileNotFoundError:
+                            # The path in the rc file might be invalid or a variable; ignore it.
+                            continue
+        except Exception:
+            # Ignore files we can't read or have encoding issues.
+            continue
+
     return False
 
 
