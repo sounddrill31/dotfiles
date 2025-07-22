@@ -5,6 +5,7 @@ import requests
 import tarfile
 import yaml
 import stat
+import subprocess
 from git import Repo, GitCommandError
 
 # ---- Helper functions ----
@@ -185,6 +186,7 @@ def main():
         else:
             ok, err, msg = False, f"Unknown source: {source}", f"FAILED: Unknown source"
         
+        # Make executable if requested
         if ok and entry.get("exec", False):
             try:
                 st = os.stat(abs_path)
@@ -193,10 +195,38 @@ def main():
             except Exception as e:
                 ok, msg = False, f"FAILED: chmod failed - {e}"
 
+        # Run post-install command if specified
+        if ok and "run-after" in entry:
+            command = entry["run-after"]
+            try:
+                # Using shell=True for convenience with complex commands (e.g., with ';')
+                # This is acceptable in a personal dotfile script where the config is trusted.
+                result = subprocess.run(
+                    command,
+                    shell=True,
+                    check=True,  # Raises CalledProcessError on non-zero exit codes
+                    capture_output=True,
+                    text=True,
+                    timeout=60
+                )
+                msg += f" (ran: '{command}')"
+            except subprocess.CalledProcessError as e:
+                ok = False
+                # Combine stderr and stdout for a more complete error message
+                error_output = (e.stderr.strip() + "\n" + e.stdout.strip()).strip()
+                msg = f"FAILED: 'run-after' command failed (exit {e.returncode}). Output: {error_output}"
+            except FileNotFoundError:
+                ok = False
+                msg = f"FAILED: 'run-after' command not found: '{command.split()[0]}'"
+            except Exception as e:
+                ok = False
+                msg = f"FAILED: 'run-after' command encountered an error: {e}"
+
+
         print_status(idx, total, path, "ok" if ok else "fail", msg)
         if ok:
             ok_count += 1
-            # --- New autostart check ---
+            # --- Autostart check ---
             if entry.get("autostart", False):
                 if not check_if_sourced(abs_path):
                     autostart_instructions.append(abs_path)

@@ -19,6 +19,7 @@ files:
     url: https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/nord/a_video_game_graphics_of_a_forest_and_a_lake.png
     source: external
     type: direct
+    run-after: "systemctl --user add-wants niri.service swaybg.service; systemctl --user daemon-reload"
 
   # Autostart
   - path: .customrc

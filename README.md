@@ -1,10 +1,13 @@
 # dotfiles
-Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty by default. 
+Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty and systemd by default. 
 
 Yes, I use micro over nano, \*vi\*, emacs, etc.  
 
 > [!TIP]
-> Put wallpaper in ~/Pictures/Background.png (To change this, edit ~/.config/niri/config.kdl). This repo also tries to download to it, so syncing may reset your background.
+> Put wallpaper in `~/Pictures/Background.png` (To change this, edit `~/.config/systemd/user/swaybg.service`). This repo also tries to download to the location, so syncing may reset your background back to the default image.
+
+> [!TIP]
+> If you edit  ~/.config/systemd/user/swaybg.service, remember to reload the rules with: `systemctl --user daemon-reload`
 
 ## Preview
 <img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="https://github.com/user-attachments/assets/15118b01-752e-409d-a90f-1e108f9646a3" />
@@ -20,6 +23,7 @@ Ensure the following commands are available on your system:
 wpctl
 brightnessctl
 pamixer
+systemctl
 waybar
 swaybg
 wl-paste
