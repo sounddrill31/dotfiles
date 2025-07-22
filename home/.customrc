@@ -38,3 +38,5 @@ present-pdf() {
     echo -e "\033[1;32m✅ PDF created successfully!\033[0m"
 }
 
+
+alias "sync-rc"="cd ~/dotfiles;git reset --hard; git pull; python3 sync.py"
