@@ -4,7 +4,7 @@ Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty by d
 Yes, I use micro over nano, \*vi\*, emacs, etc.  
 
 > [!TIP]
-? Put wallpaper in ~/Pictures/Background.jpg (To change this, edit ~/.config/niri/config.kdl)
+> Put wallpaper in ~/Pictures/Background.png (To change this, edit ~/.config/niri/config.kdl). This repo also tries to download to it, so syncing may reset your background.
 
 ## Preview
 <img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="https://github.com/user-attachments/assets/15118b01-752e-409d-a90f-1e108f9646a3" />

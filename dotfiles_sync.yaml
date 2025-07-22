@@ -14,6 +14,12 @@ files:
   - path: .config/gtk-3.0/settings.ini
   - path: .config/gtk-4.0/settings.ini
 
+  # Wallpaper
+  - path: Pictures/Background.png
+    url: https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/nord/a_video_game_graphics_of_a_forest_and_a_lake.png
+    source: external
+    type: direct
+
   # Autostart
   - path: .customrc
     exec: true
