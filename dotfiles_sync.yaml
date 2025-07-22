@@ -16,7 +16,7 @@ files:
 
   # Wallpaper
   - path: Pictures/Background.png
-    url: https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/nord/a_video_game_graphics_of_a_forest_and_a_lake.png
+    url: https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/pixel/a_video_game_screen_with_trees_and_bushes.jpg
     source: external
     type: direct
   - path: .config/systemd/user/swaybg.service

@@ -82,3 +82,8 @@ python3 sync.py
 - Whatsapp, [Firefox New Tab](https://gist.github.com/sounddrill31/a7428018778f788a95344ab9e6cb1353)
 
 etc
+
+## Credits (in no particular order)
+Directly used resources from:
+- [OpenSUSE/OpenSUSEway](https://github.com/openSUSE/openSUSEway/blob/main/.config/waybar/config.jsonc) for Waybar config
+- ![dharmx/walls](https://github.comz/dharmx/walls/blob/main/pixel/a_video_game_screen_with_trees_and_bushes.jpg) for Wallpaper(s)
