@@ -265,6 +265,8 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 
+spawn-at-startup "cliphist" "wipe"
+
 //spawn-at-startup "swaybg" "-i" "~/Downloads/b227.jpg"// Wallpaper
 
 spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /tmp/wobpipe | wob"
