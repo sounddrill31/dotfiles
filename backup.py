@@ -10,11 +10,13 @@ from pathlib import Path
 # ---- CLI argument parsing ----
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Backup selected dotfiles from local system into a git-ready directory."
+        description="Backup selected dotfiles from local system into a git-ready directory.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('--yaml-path', default='dotfiles_sync.yaml', help='YAML config [default: dotfiles_sync.yaml]')
     parser.add_argument('--default-repo', default=None, help='Git repo to use (overrides saved .repo)')
     parser.add_argument('--config-dir', default='~/.config/dotfiles-sync', help='Directory to store repo config [default: ~/.config/dotfiles-sync]')
+    parser.add_argument('--prefix', default='~', help='Override home path (default: ~)')
     return parser.parse_args()
 
 # ---- ANSI Colors ----
@@ -78,15 +80,16 @@ def prepare_repo(clone_path, repo_url, config_file):
 def is_from_repo(entry):
     return entry.get("source", "repo") == "repo"
 
-# ---- Copy repo dotfiles from system → dotfiles-prep ----
-def backup_dotfiles(entries, clone_path):
-    home = os.path.expanduser("~")
+# ---- Copy files from system to clone_path ----
+def backup_dotfiles(entries, clone_path, prefix):
+    resolved_prefix = os.path.expanduser(prefix)
+
     for entry in entries:
         if not is_from_repo(entry):
             continue
 
         rel_path = entry["path"].replace("~", "")
-        src = os.path.join(home, rel_path)
+        src = os.path.join(resolved_prefix, rel_path)
         dest = os.path.join(clone_path, rel_path.lstrip("/"))
 
         if not os.path.exists(src):
@@ -111,15 +114,26 @@ def finish_install(clone_path):
     print(f"{GREEN}✅ Backup complete in:{RESET} {clone_path}")
     print(f"Next: {CYAN}cd {clone_path} && git add . && git commit -m 'update dotfiles' && git push{RESET}")
 
-# ---- Main driver ----
+# ---- Main function ----
 def main():
     args = parse_args()
     yaml_path = args.yaml_path
+    prefix = args.prefix
+    resolved_prefix = os.path.expanduser(prefix)
     clone_path = os.path.expanduser("~/dotfiles-prep")
 
     print(f"{BOLD}{CYAN}✨ dotfiles BACKUP — Fancy Dotfile Exporter 🔧{RESET}\n")
 
-    # Load YAML
+    if prefix != "~":
+        print(f"{CYAN}Using prefix as {resolved_prefix}{RESET}")
+        if not os.path.exists(resolved_prefix):
+            try:
+                os.makedirs(resolved_prefix)
+            except Exception as e:
+                print(f"{YELLOW}Failed to create prefix path: {e}{RESET}")
+                sys.exit(1)
+
+    # Load YAML config
     if not os.path.exists(yaml_path):
         print(f"{YELLOW}⚠️ Could not find config file: {yaml_path}{RESET}")
         sys.exit(1)
@@ -133,7 +147,7 @@ def main():
     entries = config.get("files", [])
     repo_url, config_file = get_repo_url(args.config_dir, args.default_repo)
     prepare_repo(clone_path, repo_url, config_file)
-    backup_dotfiles(entries, clone_path)
+    backup_dotfiles(entries, clone_path, prefix)
     finish_install(clone_path)
 
 if __name__ == "__main__":
