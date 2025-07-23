@@ -7,14 +7,33 @@ import yaml
 import stat
 import subprocess
 from git import Repo, GitCommandError
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="⚙️  dotfiles SYNC — fetch and install your config files from repo/archive/git.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        "--prefix", default="~", help="Prefix target install path (normally ~)."
+    )
+    return parser.parse_args()
+
 
 # ---- Helper functions ----
 
-def home_path(target_path):
-    target_path = target_path.replace("~", os.path.expanduser("~"))
-    if not os.path.isabs(target_path):
-        return os.path.join(os.path.expanduser("~"), target_path)
+
+def home_path(target_path, prefix="~"):
+    base = os.path.expanduser(prefix)
+
+    # Apply to target_path
+    if target_path.startswith("~"):
+        target_path = target_path.replace("~", base, 1)
+    elif not os.path.isabs(target_path):
+        target_path = os.path.join(base, target_path)
+
     return target_path
+
 
 def print_status(idx, total, path, status, msg):
     percent = int(100 * (idx + 1) / total)
@@ -146,6 +165,20 @@ def fetch_from_external(entry, dest):
 
 
 def main():
+    args = parse_args()
+    prefix = args.prefix
+    resolved_prefix = os.path.expanduser(prefix)
+    if prefix != "~":
+        print(f"\033[36mUsing prefix as {resolved_prefix}\033[0m")
+    if not os.path.exists(resolved_prefix):
+        try:
+            os.makedirs(resolved_prefix)
+        except Exception as e:
+            print(f"\033[91mERROR: Failed to create prefix path {resolved_prefix}: {e}\033[0m")
+            sys.exit(1)
+
+
+
     try:
         with open("dotfiles_sync.yaml") as f:
             config = yaml.safe_load(f)
@@ -163,7 +196,7 @@ def main():
     for idx, entry in enumerate(files):
         path = entry["path"]
         source = entry.get("source", "repo")
-        abs_path = home_path(path)
+        abs_path = home_path(path,prefix)
         # Remove if exists (unless it's git but same path)
         if source == "git":
             if os.path.exists(abs_path): shutil.rmtree(abs_path)
