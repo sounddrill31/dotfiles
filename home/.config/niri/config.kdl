@@ -365,6 +365,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-show-icons" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
     Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
+
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -629,6 +630,7 @@ binds {
 	Mod+Alt+T { spawn "telegram-desktop"; }
 	Mod+Alt+D { spawn "discord"; }
 	Mod+Alt+W { spawn "whatsapp"; }
+	Mod+Alt+F { spawn "nautilus"; }
 	
 }
 
