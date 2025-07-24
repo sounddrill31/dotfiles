@@ -16,7 +16,7 @@ files:
 
   # Wallpaper
   - path: Pictures/Background.png
-    url: https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/pixel/a_video_game_screen_with_trees_and_bushes.jpg
+    url: https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/gray-background.png
     source: external
     type: direct
   - path: .config/systemd/user/swaybg.service

@@ -10,9 +10,9 @@ Yes, I use micro over nano, \*vi\*, emacs, etc.
 > If you edit  ~/.config/systemd/user/swaybg.service, remember to reload the rules with: `systemctl --user daemon-reload`
 
 ## Preview
-<img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="https://github.com/user-attachments/assets/15118b01-752e-409d-a90f-1e108f9646a3" />
+<img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="./assets/screenshot-overview.png" />
 
-<img width="1366" height="768" alt="niri setup with 3 terminal windows, one syncing from this repo, one showing fastfetch and the last editing the niri config" src="https://github.com/user-attachments/assets/68c9ea2a-d70d-4ac7-b188-a709c6f02997" />
+<img width="1366" height="768" alt="niri setup with 3 terminal windows, one syncing from this repo, one showing fastfetch and the last editing the niri config" src="./assets/screenshot-home.png" />
 
 
 ## Required Packages
@@ -65,6 +65,11 @@ git clone https://github.com/sounddrill31/dotfiles; cd dotfiles
 python3 sync.py
 ```
 
+To Back up, 
+```bash
+python3 backup.py
+```
+
 ## Choices
 - OpenSUSE Tumbleweed
 - Niri
@@ -86,4 +91,4 @@ etc
 ## Credits (in no particular order)
 Directly used resources from:
 - [OpenSUSE/OpenSUSEway](https://github.com/openSUSE/openSUSEway/blob/main/.config/waybar/config.jsonc) for Waybar config
-- ![dharmx/walls](https://github.comz/dharmx/walls/blob/main/pixel/a_video_game_screen_with_trees_and_bushes.jpg) for Wallpaper(s)
+- ![D3Ext/aesthetic-wallpapers](https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/gray-background.png) for Wallpaper(s)
