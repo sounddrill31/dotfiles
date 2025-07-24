@@ -91,4 +91,4 @@ etc
 ## Credits (in no particular order)
 Directly used resources from:
 - [OpenSUSE/OpenSUSEway](https://github.com/openSUSE/openSUSEway/blob/main/.config/waybar/config.jsonc) for Waybar config
-- ![D3Ext/aesthetic-wallpapers](https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/gray-background.png) for Wallpaper(s)
+- ![D3Ext/aesthetic-wallpapers](https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/astronaut-nord.png) for Wallpaper(s)
