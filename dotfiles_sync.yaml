@@ -20,7 +20,7 @@ files:
     source: external
     type: direct
   - path: .config/systemd/user/swaybg.service
-    run-after: "systemctl --user add-wants niri.service swaybg.service; systemctl --user daemon-reload"
+    run-after: "systemctl --user add-wants niri.service swaybg.service; systemctl --user daemon-reload; systemctl --user restart swaybg"
 
   # Autostart
   - path: .customrc

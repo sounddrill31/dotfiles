@@ -12,8 +12,6 @@ Yes, I use micro over nano, \*vi\*, emacs, etc.
 ## Preview
 <img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="./assets/screenshot-overview.png" />
 
-<img width="1366" height="768" alt="niri setup with 3 terminal windows, one syncing from this repo, one showing fastfetch and the last editing the niri config" src="./assets/screenshot-home.png" />
-
 
 ## Required Packages
 
