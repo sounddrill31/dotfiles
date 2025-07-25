@@ -32,7 +32,8 @@
         "battery#bat2",
         "pulseaudio",
         //"custom/layout",
-        "clock" //,
+        "clock",
+        "custom/power" //,
         //"custom/notification"
     ],
 
@@ -238,5 +239,10 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
+    },
+    "custom/power": {
+    "format": "⏻",
+    "on-click": "rofi-power-menu",
+    "tooltip": false
     }
 }

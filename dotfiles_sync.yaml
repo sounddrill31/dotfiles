@@ -35,6 +35,8 @@ files:
 
   # Waybar
   - path: .config/waybar/config.jsonc   # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/waybar 
+  - path: .config/waybar/scripts/power-menu.sh
+    exec: true
 
   # Micro Editor
   - path: .config/micro/settings.json
