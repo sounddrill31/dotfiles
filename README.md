@@ -24,7 +24,11 @@ pamixer
 systemctl
 waybar
 swaybg
+xwayland-satellite
+firefox
 wl-paste
+alacritty
+cliphist
 nm-applet
 alacritty
 rofi
