@@ -41,7 +41,7 @@ present-pdf() {
 
 alias "sync-rc"="cd ~/dotfiles;git reset --hard; git pull; python3 sync.py"
 
-alias alice="cd ~/Projects/alice;labwc -s 'pixi run start'"
 
 # Wraps any command in quotes into a labwc session eg. xrun "nautilus"
 xrun() { labwc -s "$@"; }
+alias alice="cd ~/Projects/alice; xrun 'pixi run start'"
