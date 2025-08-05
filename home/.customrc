@@ -40,3 +40,5 @@ present-pdf() {
 
 
 alias "sync-rc"="cd ~/dotfiles;git reset --hard; git pull; python3 sync.py"
+
+alias alice="cd ~/Projects/alice;labwc -s 'pixi run start'"^C
