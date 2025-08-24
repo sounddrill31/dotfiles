@@ -71,6 +71,12 @@ files:
     source: git
     url: https://github.com/sounddrill31/wob
 
+  # 1hz
+  - path: ~/Projects/pysmu/adalm1000
+    source: git
+    url: https://github.com/sounddrill31/pysmu-experiments # Aditya's 1hz clock
+    run-after: "wget -qO- https://pixi.sh/install.sh | sh"
+
 #Example for External
 #  - path: .local/bin/custom-tool
 #    source: external
