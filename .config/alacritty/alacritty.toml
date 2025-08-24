@@ -1,0 +1,13 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/midnight_haze.toml"
+]
+[window]
+opacity = 0.9
+dynamic_padding = true
+#blur = true
+#decorations = "Buttonless"
+#decorations = "none"
+#decorations = "Full"
+title = "Terminal"
+dynamic_title = true

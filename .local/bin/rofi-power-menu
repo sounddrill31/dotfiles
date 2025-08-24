@@ -1,0 +1,10 @@
+#!/bin/sh
+
+chosen=$(printf "  Shutdown\n  Restart\n  Sleep" | rofi -dmenu -i -p "Power Menu")
+
+case "$chosen" in
+	"  Shutdown") systemctl poweroff ;;
+	"  Restart") systemctl reboot ;;
+	"  Sleep") systemctl suspend ;;
+	*) exit 1 ;;
+esac

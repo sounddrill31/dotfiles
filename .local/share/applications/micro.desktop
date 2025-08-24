@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Micro
+Comment=Modern and intuitive terminal-based text editor
+Exec=alacritty -e micro %U
+Terminal=false
+Type=Application
+MimeType=text/plain;
+Icon=micro-logo-mark.svg
+Categories=Utility;TextEditor;
