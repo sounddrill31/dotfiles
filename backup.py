@@ -90,7 +90,7 @@ def backup_dotfiles(entries, clone_path, prefix):
 
         rel_path = entry["path"].replace("~", "")
         src = os.path.join(resolved_prefix, rel_path)
-        dest = os.path.join(clone_path, rel_path.lstrip("/"))
+        dest = os.path.join(clone_path, "home", rel_path.lstrip("/"))
 
         if not os.path.exists(src):
             print(f"{YELLOW}✗ {src} does not exist — skipping{RESET}")
