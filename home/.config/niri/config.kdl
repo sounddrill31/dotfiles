@@ -285,7 +285,7 @@ spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /t
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup  "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
-//spawn-at-startup "xwayland-satellite" ":0"
+spawn-at-startup "xwayland-satellite" ":0"
 
 // spawn-at-startup "telegram-desktop"
 
