@@ -53,7 +53,7 @@ files:
     branch: main
     run-after:
       - "cd sources/sherlock; cargo build --release"
-      - "sudo cp target/release/sherlock ~/.local/bin || true"
+      - "cp target/release/sherlock ~/.local/bin || true"
     idempotent: true
     timeout: none
 
@@ -64,7 +64,7 @@ files:
     branch: main
     run-after:
       - "cd sources/sherlock-clp; cargo build --release"
-      - "sudo cp target/release/sherlock-clp ~/.local/bin || true"
+      - "cp target/release/sherlock-clp ~/.local/bin || true"
     idempotent: true
     timeout: none
 
