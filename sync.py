@@ -124,17 +124,24 @@ def fetch_raw_file(repo_url, branch, rel_path, dest):
 
 def fetch_from_git(url, target, branch="main", submodules=False):
     try:
-        if os.path.exists(target):
-            shutil.rmtree(target)
-        
-        clone_args = {
-            "depth": 1,
-            "branch": branch
-        }
-        if submodules:
-            clone_args["recurse_submodules"] = True
+        if os.path.exists(target) and os.path.isdir(os.path.join(target, ".git")):
+            repo = Repo(target)
+            repo.remotes.origin.fetch()
+            repo.git.reset("--hard", f"origin/{branch}")
+            if submodules:
+                repo.submodule_update(init=True, recursive=True)
+        else:
+            if os.path.exists(target):
+                shutil.rmtree(target)
+            
+            clone_args = {
+                "depth": 1,
+                "branch": branch
+            }
+            if submodules:
+                clone_args["recurse_submodules"] = True
 
-        Repo.clone_from(url, target, **clone_args)
+            Repo.clone_from(url, target, **clone_args)
         return True, None
     except GitCommandError as e:
         return False, str(e)
@@ -229,14 +236,13 @@ def main():
 
         source = entry.get("source", "repo")
         abs_path = home_path(path,prefix)
-        # Remove if exists (unless it's git but same path)
-        if source == "git":
-            if os.path.exists(abs_path): shutil.rmtree(abs_path)
-        elif os.path.lexists(abs_path): # Use lexists for symlinks
-            if os.path.isdir(abs_path) and not os.path.islink(abs_path):
-                shutil.rmtree(abs_path)
-            else:
-                os.remove(abs_path)
+        # Remove if exists, but not for git sources
+        if source not in ["git", "git-with-submodules"]:
+            if os.path.lexists(abs_path): # Use lexists for symlinks
+                if os.path.isdir(abs_path) and not os.path.islink(abs_path):
+                    shutil.rmtree(abs_path)
+                else:
+                    os.remove(abs_path)
 
         if source == "repo":
             repo_relative_path = path.replace("~/", "") # Assume paths are relative to home
