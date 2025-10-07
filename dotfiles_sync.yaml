@@ -57,6 +57,17 @@ files:
     idempotent: true
     timeout: none
 
+  # Sherlock-clp (with source)
+  - path: sources/sherlock-clp
+    source: git
+    url: https://github.com/Skxxtz/sherlock-clipboard
+    branch: main
+    run-after:
+      - "cd sources/sherlock-clp; cargo build --release"
+      - "sudo cp target/release/sherlock-clp ~/.local/bin || true"
+    idempotent: true
+    timeout: none
+
   # For Rofi
   - path: sources/rofi
     source: git
