@@ -654,7 +654,7 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-    Mod+V { spawn "sherlock-clp" }; 
+    Mod+V { spawn "sherlock-clp"; } 
     Mod+Shift+V { spawn "bash" "-c" "rofi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme ~/sources/rofi/themes/DarkBlue.rasi"; }
 	Mod+Alt+T { spawn "telegram-desktop"; }
 	Mod+Alt+D { spawn "discord"; }
