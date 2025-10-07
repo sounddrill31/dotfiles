@@ -115,11 +115,19 @@ def fetch_raw_file(repo_url, branch, rel_path, dest):
     except Exception as e:
         return False, str(e)
 
-def fetch_from_git(url, target, branch="main"):
+def fetch_from_git(url, target, branch="main", submodules=False):
     try:
         if os.path.exists(target):
             shutil.rmtree(target)
-        Repo.clone_from(url, target, depth=1, branch=branch)
+        
+        clone_args = {
+            "depth": 1,
+            "branch": branch
+        }
+        if submodules:
+            clone_args["recurse_submodules"] = True
+
+        Repo.clone_from(url, target, **clone_args)
         return True, None
     except GitCommandError as e:
         return False, str(e)
@@ -213,6 +221,9 @@ def main():
         elif source == "git":
             ok, err = fetch_from_git(entry["url"], abs_path, entry.get("branch", "main"))
             msg = f"cloned {entry['url']}" if ok else f"FAILED: {err}"
+        elif source == "git-with-submodules":
+            ok, err = fetch_from_git(entry["url"], abs_path, entry.get("branch", "main"), submodules=True)
+            msg = f"cloned {entry['url']} with submodules" if ok else f"FAILED: {err}"
         elif source == "external":
             ok, err = fetch_from_external(entry, abs_path)
             msg = f"downloaded {entry['url']}" if ok else f"FAILED: {err}"
@@ -228,32 +239,53 @@ def main():
             except Exception as e:
                 ok, msg = False, f"FAILED: chmod failed - {e}"
 
-        # Run post-install command if specified
+        # Run post-install command(s) if specified
         if ok and "run-after" in entry:
-            command = entry["run-after"]
-            try:
-                # Using shell=True for convenience with complex commands (e.g., with ';')
-                # This is acceptable in a personal dotfile script where the config is trusted.
-                result = subprocess.run(
-                    command,
-                    shell=True,
-                    check=True,  # Raises CalledProcessError on non-zero exit codes
-                    capture_output=True,
-                    text=True,
-                    timeout=60
-                )
-                msg += f" (ran: '{command}')"
-            except subprocess.CalledProcessError as e:
-                ok = False
-                # Combine stderr and stdout for a more complete error message
-                error_output = (e.stderr.strip() + "\n" + e.stdout.strip()).strip()
-                msg = f"FAILED: 'run-after' command failed (exit {e.returncode}). Output: {error_output}"
-            except FileNotFoundError:
-                ok = False
-                msg = f"FAILED: 'run-after' command not found: '{command.split()[0]}'"
-            except Exception as e:
-                ok = False
-                msg = f"FAILED: 'run-after' command encountered an error: {e}"
+            commands = entry["run-after"]
+            if isinstance(commands, str):
+                commands = [commands]
+
+            # Determine the correct working directory for the command
+            cwd = abs_path
+            if os.path.isfile(abs_path):
+                cwd = os.path.dirname(abs_path)
+
+            num_commands = len(commands)
+            for i, command in enumerate(commands):
+                try:
+                    print_status(idx, total, path, "ok", f"running task {i+1}/{num_commands}: \033[33m{command}\033[0m...")
+                    result = subprocess.run(
+                        command,
+                        shell=True,
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                        timeout=600,
+                        cwd=cwd
+                    )
+                    
+                    # Show last few lines of output
+                    output_lines = (result.stdout.strip() + "\n" + result.stderr.strip()).strip().split('\n')
+                    last_lines = "\n".join(output_lines[-3:])
+                    
+                    msg += f" (ran: '{command}')"
+
+                except subprocess.CalledProcessError as e:
+                    ok = False
+                    error_output = (e.stderr.strip() + "\n" + e.stdout.strip()).strip()
+                    msg = f"FAILED on task {i+1}/{num_commands}: '{command}' (exit {e.returncode}). Output: {error_output}"
+                    break # Stop on first failure
+                except FileNotFoundError:
+                    ok = False
+                    msg = f"FAILED on task {i+1}/{num_commands}: command not found: '{command.split()[0]}'"
+                    break # Stop on first failure
+                except Exception as e:
+                    ok = False
+                    msg = f"FAILED on task {i+1}/{num_commands}: '{command}' encountered an error: {e}"
+                    break # Stop on first failure
+            
+            if ok:
+                msg = f"all {num_commands} tasks completed"
 
 
         print_status(idx, total, path, "ok" if ok else "fail", msg)
