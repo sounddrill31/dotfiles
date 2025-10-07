@@ -86,7 +86,7 @@ python3 backup.py
 - Gnome Files
 - Alacritty
 - Sherlock for primary launcher (Mod+D) and clipboard(Mod+V)
-- Rofi for secondary launcher(Mod+Shift+D, backup) and clipboard(Mod+Shift+V)
+- Rofi for secondary launcher(Mod+Shift+D, backup) and clipboard(Mod+Alt+V)
 - Firefox
 - Swaylock, swaybg
 - Micro for text editing
