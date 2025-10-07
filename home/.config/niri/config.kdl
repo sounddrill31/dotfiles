@@ -165,7 +165,7 @@ layout {
         // Uncomment this line to disable the focus ring.
         off
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -284,7 +284,7 @@ spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /t
 
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "sherlock"
+spawn-at-startup "sherlock --daemonize"
 //spawn-at-startup  "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
 spawn-at-startup "xwayland-satellite" ":0"
 
@@ -362,6 +362,11 @@ window-rule {
 /-window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+}
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background true
 }
 
 binds {
