@@ -3,7 +3,7 @@ repo: https://github.com/sounddrill31/dotfiles
 branch: main
 
 # Paths start at ~ by default, unless it starts with /
-# Fetch from repo's raw files by default unless external or git is specified 
+# Fetch from repo's files by default unless external or git is specified 
 
 files:
 
@@ -20,7 +20,10 @@ files:
     source: external
     type: direct
   - path: .config/systemd/user/swaybg.service
-    run-after: "systemctl --user add-wants niri.service swaybg.service; systemctl --user daemon-reload; systemctl --user restart swaybg"
+    run-after:
+      - "systemctl --user add-wants niri.service swaybg.service"
+      - "systemctl --user daemon-reload"
+      - "systemctl --user restart swaybg"
 
   # Autostart
   - path: .customrc
@@ -43,6 +46,15 @@ files:
   - path: .local/share/applications/micro.desktop
   #- path: .config/micro/bindings.json
 
+  # Sherlock (with source)
+  - path: sources/sherlock
+    source: git-with-submodules
+    url: https://github.com/Skxxtz/sherlock
+    branch: main
+    run-after:
+      - "cd sources/sherlock; cargo build --release"
+      - "sudo cp target/release/sherlock /usr/local/bin || true"
+
   # For Rofi
   - path: sources/rofi
     source: git
@@ -61,7 +73,7 @@ files:
     branch: master
 
   # icons
-  - path: ~/.local/share/icons/BreezeX-RosePineDawn-Linux
+  - path: .local/share/icons/BreezeX-RosePineDawn-Linux
     source: external
     type: tarxz
     url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
@@ -75,7 +87,9 @@ files:
   - path: ~/Projects/pysmu/adalm1000
     source: git
     url: https://github.com/sounddrill31/pysmu-experiments # Aditya's 1hz clock
-    run-after: "wget -qO- https://pixi.sh/install.sh | sh"
+    run-after:
+      - "wget -qO- https://pixi.sh/install.sh | sh"
+      - "cd linux && pixi install"
 
 #Example for External
 #  - path: .local/bin/custom-tool

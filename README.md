@@ -18,6 +18,13 @@ Yes, I use micro over nano, \*vi\*, emacs, etc.
 Ensure the following commands are available on your system:
 
 ```
+rust
+cargo
+git
+gtk4-devel
+gtk4-layer-shell-devel
+libopenssl-devel
+pkg-config
 wpctl
 brightnessctl
 pamixer
@@ -78,7 +85,8 @@ python3 backup.py
 - Waybar
 - Gnome Files
 - Alacritty
-- Rofi
+- Sherlock for primary launcher (Mod+D)
+- Rofi for secondary launcher(Mod+Shift+D, backup)
 - Firefox
 - Swaylock, swaybg
 - Micro for text editing

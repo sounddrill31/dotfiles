@@ -284,7 +284,8 @@ spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /t
 
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup  "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
+spawn-at-startup "sherlock"
+//spawn-at-startup  "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
 spawn-at-startup "xwayland-satellite" ":0"
 
 // spawn-at-startup "telegram-desktop"
@@ -380,7 +381,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
 
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
+    Mod+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
+    Mod+Shift+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
     Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
