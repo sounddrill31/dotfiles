@@ -48,12 +48,14 @@ files:
 
   # Sherlock (with source)
   - path: sources/sherlock
-    source: git-with-submodules
+    source: git
     url: https://github.com/Skxxtz/sherlock
     branch: main
     run-after:
       - "cd sources/sherlock; cargo build --release"
-      - "sudo cp target/release/sherlock /usr/local/bin || true"
+      - "sudo cp target/release/sherlock ~/.local/bin || true"
+    idempotent: true
+    timeout: none
 
   # For Rofi
   - path: sources/rofi
@@ -80,13 +82,15 @@ files:
 
   # wob
   - path: .config/wob
-    source: git
+    source: git-with-submodules
     url: https://github.com/sounddrill31/wob
+    idempotent: true
 
   # 1hz
   - path: ~/Projects/pysmu/adalm1000
     source: git
     url: https://github.com/sounddrill31/pysmu-experiments # Aditya's 1hz clock
+    idempotent: true
     run-after:
       - "wget -qO- https://pixi.sh/install.sh | sh"
       - "cd linux && pixi install"

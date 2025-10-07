@@ -6,6 +6,7 @@ import tarfile
 import yaml
 import stat
 import subprocess
+import json
 from git import Repo, GitCommandError
 import argparse
 
@@ -16,6 +17,12 @@ def parse_args():
     )
     parser.add_argument(
         "--prefix", default="~", help="Prefix target install path (normally ~)."
+    )
+    parser.add_argument(
+        "--reinstall", action="store_true", help="Force reinstall of all items, ignoring saved state."
+    )
+    parser.add_argument(
+        "--timeout", type=int, default=120, help="Default timeout in seconds for commands."
     )
     return parser.parse_args()
 
@@ -175,7 +182,11 @@ def fetch_from_external(entry, dest):
 def main():
     args = parse_args()
     prefix = args.prefix
+    reinstall_forced = args.reinstall
+    default_timeout = args.timeout
     resolved_prefix = os.path.expanduser(prefix)
+    state_file = os.path.join(resolved_prefix, ".dotfiles_sync_state.json")
+
     if prefix != "~":
         print(f"\033[36mUsing prefix as {resolved_prefix}\033[0m")
     if not os.path.exists(resolved_prefix):
@@ -185,7 +196,11 @@ def main():
             print(f"\033[91mERROR: Failed to create prefix path {resolved_prefix}: {e}\033[0m")
             sys.exit(1)
 
-
+    try:
+        with open(state_file, "r") as f:
+            installed_state = set(json.load(f))
+    except (FileNotFoundError, json.JSONDecodeError):
+        installed_state = set()
 
     try:
         with open("dotfiles_sync.yaml") as f:
@@ -199,10 +214,19 @@ def main():
     files = config.get("files", [])
     total = len(files)
     ok_count = 0
+    skipped_count = 0
     autostart_instructions = []
 
     for idx, entry in enumerate(files):
         path = entry["path"]
+        
+        # Check if we should skip this entry
+        if not reinstall_forced and entry.get("idempotent", False) and path in installed_state:
+            print_status(idx, total, path, "skip", "already installed (idempotent)")
+            skipped_count += 1
+            ok_count += 1
+            continue
+
         source = entry.get("source", "repo")
         abs_path = home_path(path,prefix)
         # Remove if exists (unless it's git but same path)
@@ -250,6 +274,13 @@ def main():
             if os.path.isfile(abs_path):
                 cwd = os.path.dirname(abs_path)
 
+            # Determine the timeout for the command
+            timeout_val = entry.get("timeout", default_timeout)
+            if timeout_val == "none":
+                timeout = None
+            else:
+                timeout = int(timeout_val)
+
             num_commands = len(commands)
             for i, command in enumerate(commands):
                 try:
@@ -260,7 +291,7 @@ def main():
                         check=True,
                         capture_output=True,
                         text=True,
-                        timeout=600,
+                        timeout=timeout,
                         cwd=cwd
                     )
                     
@@ -279,6 +310,10 @@ def main():
                     ok = False
                     msg = f"FAILED on task {i+1}/{num_commands}: command not found: '{command.split()[0]}'"
                     break # Stop on first failure
+                except subprocess.TimeoutExpired:
+                    ok = False
+                    msg = f"FAILED on task {i+1}/{num_commands}: '{command}' timed out after {timeout} seconds"
+                    break # Stop on first failure
                 except Exception as e:
                     ok = False
                     msg = f"FAILED on task {i+1}/{num_commands}: '{command}' encountered an error: {e}"
@@ -291,12 +326,22 @@ def main():
         print_status(idx, total, path, "ok" if ok else "fail", msg)
         if ok:
             ok_count += 1
+            installed_state.add(path)
             # --- Autostart check ---
             if entry.get("autostart", False):
                 if not check_if_sourced(abs_path):
                     autostart_instructions.append(abs_path)
+        else:
+            installed_state.discard(path)
 
-    print(f"\n\033[96mDone:\033[0m {ok_count}/{total} successful, {total-ok_count} failed.")
+    # --- Save state ---
+    try:
+        with open(state_file, "w") as f:
+            json.dump(list(installed_state), f, indent=2)
+    except Exception as e:
+        print(f"\n\033[91mWarning: Failed to save state file {state_file}: {e}\033[0m")
+
+    print(f"\n\033[96mDone:\033[0m {ok_count}/{total} successful ({skipped_count} skipped), {total-ok_count} failed.")
 
     # --- Print all autostart instructions at the end ---
     if autostart_instructions:
