@@ -1,6 +1,6 @@
 {
     // Appearance options
-    "layer": "top",
+    "layer": "bottom",
     "height": 30,
 
     // Module order
