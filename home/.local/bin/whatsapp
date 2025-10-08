@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#firefox -new-window "https://web.whatsapp.com" &
+
+flatpak run com.vivaldi.Vivaldi --new-window "https://web.whatsapp.com"

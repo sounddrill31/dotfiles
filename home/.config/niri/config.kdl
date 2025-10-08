@@ -344,6 +344,16 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match title="^Picture in picture$"
+    open-floating true
+}
+
+
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -388,7 +398,8 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
     Mod+Shift+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
-    Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
+    Mod+B hotkey-overlay-title="Run an Application: vivaldi" { spawn "vivaldi"; }
+    Mod+Shift+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

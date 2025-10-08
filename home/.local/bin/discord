@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#firefox -new-window "https://discord.com/app" &
+
+flatpak run com.vivaldi.Vivaldi --new-window "https://discord.com/app"
