@@ -398,7 +398,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
     Mod+Shift+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
-    Mod+B hotkey-overlay-title="Run an Application: vivaldi" { spawn "vivaldi"; }
+    Mod+B hotkey-overlay-title="Run an Application: vivaldi" { spawn "flatpak" "run" "com.vivaldi.Vivaldi"; }
     Mod+Shift+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
 
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
