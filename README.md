@@ -41,6 +41,7 @@ alacritty
 rofi
 wob
 niri
+flatpak # for browser scripts
 ```
 
 ### Python deps:
@@ -87,14 +88,15 @@ python3 backup.py
 - Alacritty
 - Sherlock for primary launcher (Mod+D) and clipboard(Mod+V)
 - Rofi for secondary launcher(Mod+Shift+D, backup) and clipboard(Mod+Alt+V)
+- Vivaldi, installed from flatpak
 - Firefox
 - Swaylock, swaybg
 - Micro for text editing
 - Evolution for Email
 - rofi
 - Telegram Desktop
-- Discord, [Firefox New Tab](https://gist.github.com/sounddrill31/7e01a6ef562e3497e38ba583a62f7ce1)
-- Whatsapp, [Firefox New Tab](https://gist.github.com/sounddrill31/a7428018778f788a95344ab9e6cb1353)
+- Discord, Vivaldi New Tab. [Old Script with firefox](https://gist.github.com/sounddrill31/7e01a6ef562e3497e38ba583a62f7ce1)
+- Whatsapp, Vivaldi New Tab. [Old Script with firefox](https://gist.github.com/sounddrill31/a7428018778f788a95344ab9e6cb1353)
 
 etc
 
