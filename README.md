@@ -10,7 +10,9 @@ Yes, I use micro over nano, \*vi\*, emacs, etc.
 > If you edit  ~/.config/systemd/user/swaybg.service, remember to reload the rules with: `systemctl --user daemon-reload`
 
 ## Preview
-<img width="1366" height="768" alt="niri setup with a volume bar, htop opened, rofi drun menu opened, and a fastfetch" src="./assets/screenshot-overview.png" />
+<img width="1366" height="768" alt="niri setup with a volume bar, some apps opened, and a fastfetch" src="./assets/screenshot-overview.png" />
+
+<img width="1366" height="768" alt="niri setup with a sherlock and a few apps open" src="./assets/overview-with-launcher.png" />
 
 
 ## Required Packages
