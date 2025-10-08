@@ -94,8 +94,7 @@ python3 backup.py
 - Firefox
 - Swaylock, swaybg
 - Micro for text editing
-- Evolution for Email
-- rofi
+- Vivaldi mail and Evolution for Email
 - Telegram Desktop
 - Discord, Vivaldi New Tab. [Old Script with firefox](https://gist.github.com/sounddrill31/7e01a6ef562e3497e38ba583a62f7ce1)
 - Whatsapp, Vivaldi New Tab. [Old Script with firefox](https://gist.github.com/sounddrill31/a7428018778f788a95344ab9e6cb1353)
