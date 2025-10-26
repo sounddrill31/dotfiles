@@ -10,9 +10,8 @@ Yes, I use micro over nano, \*vi\*, emacs, etc.
 > If you edit  ~/.config/systemd/user/swaybg.service, remember to reload the rules with: `systemctl --user daemon-reload`
 
 ## Preview
-<img width="1366" height="768" alt="niri setup with a volume bar, some apps opened, and a fastfetch" src="./assets/screenshot-overview.png" />
 
-<img width="1366" height="768" alt="niri setup with a sherlock and a few apps open" src="./assets/overview-with-launcher.png" />
+<img width="1366" height="768" alt="niri setup with rofi and a few apps open" src="./assets/overview-with-launcher.png" />
 
 
 ## Required Packages
@@ -88,8 +87,7 @@ python3 backup.py
 - Waybar
 - Gnome Files
 - Alacritty
-- Sherlock for primary launcher (Mod+D) and clipboard(Mod+V)
-- Rofi for secondary launcher(Mod+Shift+D, backup) and clipboard(Mod+Alt+V)
+- Rofi for launcher(Mod+D) and clipboard(Mod+V)
 - Vivaldi, installed from flatpak
 - Firefox
 - Swaylock, swaybg
