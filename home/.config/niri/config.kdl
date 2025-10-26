@@ -284,8 +284,8 @@ spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /t
 
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "sherlock --daemonize"
-//spawn-at-startup  "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
+//spawn-at-startup "sherlock --daemonize"
+spawn-at-startup  "rofi" "-drun-use-desktop-cache"  "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
 spawn-at-startup "xwayland-satellite" ":0"
 
 // spawn-at-startup "telegram-desktop"
@@ -396,8 +396,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
 
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
-    Mod+Shift+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
+    Mod+Shift+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
+    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-drun-use-desktop-cache" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
     Mod+B hotkey-overlay-title="Run an Application: vivaldi" { spawn "flatpak" "run" "com.vivaldi.Vivaldi"; }
     Mod+Shift+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
 
@@ -665,8 +665,11 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-    Mod+V { spawn "bash" "-c" "sherlock-clp | sherlock | cliphist-decode | wl-copy"; } 
-    Mod+Alt+V { spawn "bash" "-c" "rofi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme ~/sources/rofi/themes/DarkBlue.rasi"; }
+    Mod+Alt+V { spawn "bash" "-c" "sherlock-clp | sherlock | cliphist-decode | wl-copy"; } 
+    Mod+V { spawn "bash" "-c" "rofi -drun-use-desktop-cache -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons -theme ~/sources/rofi/themes/DarkBlue.rasi"; }
+	Mod+Ctrl+Shift+S { spawn "pkill" "sherlock"; }
+	Mod+Ctrl+Shift+R { spawn "pkill" "rofi"; }
+
 	Mod+Alt+T { spawn "telegram-desktop"; }
 	Mod+Alt+D { spawn "discord"; }
 	Mod+Alt+W { spawn "whatsapp"; }
