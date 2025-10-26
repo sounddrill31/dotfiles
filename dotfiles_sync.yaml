@@ -95,10 +95,7 @@ files:
     url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
 
   # wob
-  - path: .config/wob
-    source: git-with-submodules
-    url: https://github.com/sounddrill31/wob
-    idempotent: true
+  - path: .config/wob/wob.ini
 
   # 1hz
   - path: ~/Projects/pysmu/adalm1000
