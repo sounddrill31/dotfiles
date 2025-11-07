@@ -288,6 +288,10 @@ spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup  "rofi" "-drun-use-desktop-cache"  "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
 spawn-at-startup "xwayland-satellite" ":0"
 
+//spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
+
+spawn-at-startup "swayidle" "-w"  "timeout" "570" "swaylock -f --grace 30"  "timeout" "601" "niri msg action power-off-monitors"  "resume" "niri msg action power-on-monitors"  "before-sleep" "swaylock -f"
+
 // spawn-at-startup "telegram-desktop"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
