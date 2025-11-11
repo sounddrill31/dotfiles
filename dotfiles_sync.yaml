@@ -108,10 +108,10 @@ files:
 
   # Swaylock, dracula theme
   - path: .config/swaylock/config
-    url: https://raw.githubusercontent.com/dracula/swaylock/refs/heads/main/swaylock/config
+    url: https://raw.githubusercontent.com/sounddrill31/swaylock/refs/heads/main/swaylock/config
     source: external
   - path: .config/swaylock/dracula-wallpaper.svg
-    url: https://raw.githubusercontent.com/dracula/swaylock/refs/heads/main/swaylock/dracula-wallpaper.svg
+    url: https://raw.githubusercontent.com/sounddrill31/swaylock/refs/heads/main/swaylock/dracula-wallpaper.svg
     source: external
 
 
