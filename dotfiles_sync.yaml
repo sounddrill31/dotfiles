@@ -19,11 +19,11 @@ files:
     url: https://codeberg.org/LGFae/awww/media/branch/demos/assets/demo.gif
     source: external
     type: direct
-#  - path: .config/systemd/user/swaybg.service
-#    run-after:
-#      - "systemctl --user add-wants niri.service swaybg.service"
-#      - "systemctl --user daemon-reload"
-#      - "systemctl --user restart swaybg"
+  - path: .config/systemd/user/swww.service
+    run-after:
+      - "systemctl --user add-wants niri.service swww.service"
+      - "systemctl --user daemon-reload"
+      - "systemctl --user restart swww"
 
   # Autostart
   - path: .customrc
