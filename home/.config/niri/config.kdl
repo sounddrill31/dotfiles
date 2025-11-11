@@ -6,12 +6,12 @@
 
 
 environment {
-    DISPLAY ":0"
+  //  DISPLAY ":0"
     WOBSOCK "/tmp/wobpipe"
 }
-//xwayland-satellite {
-//	path "xwayland-satellite"
-//}
+xwayland-satellite {
+	path "xwayland-satellite"
+}
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -274,8 +274,11 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "awww-daemon"
+
 spawn-at-startup "waybar"
 
+spawn-at-startup "awww" "img" "~/Pictures/Download.gif"
 spawn-at-startup "cliphist" "wipe"
 
 //spawn-at-startup "swaybg" "-i" "~/Downloads/b227.jpg"// Wallpaper
@@ -286,7 +289,7 @@ spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
 //spawn-at-startup "sherlock --daemonize"
 spawn-at-startup  "rofi" "-drun-use-desktop-cache"  "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
-spawn-at-startup "xwayland-satellite" ":0"
+//spawn-at-startup "xwayland-satellite" ":0"
 
 //spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
