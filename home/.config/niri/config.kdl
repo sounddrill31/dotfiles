@@ -325,7 +325,7 @@ animations {
 
 // Make the swaybg wallpaper visible in the overview backdrop.
 layer-rule {
-    match namespace="^wallpaper$"
+    match namespace="^swww-daemon$"
     place-within-backdrop true
 }
 
