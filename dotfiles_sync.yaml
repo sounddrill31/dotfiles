@@ -110,7 +110,7 @@ files:
   - path: .config/swaylock
     source: git
     url: https://github.com/dracula/swaylock.git
-    branch: master # main is default
+    branch: main # main is default
 
 #Example for External
 #  - path: .local/bin/custom-tool
