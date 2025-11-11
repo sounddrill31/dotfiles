@@ -106,6 +106,12 @@ files:
       - "wget -qO- https://pixi.sh/install.sh | sh"
       - "cd linux && pixi install"
 
+  # Swaylock, dracula theme
+  - path: .config/swaylock
+    source: git
+    url: https://github.com/dracula/swaylock.git
+    branch: master # main is default
+
 #Example for External
 #  - path: .local/bin/custom-tool
 #    source: external
