@@ -107,10 +107,13 @@ files:
       - "cd linux && pixi install"
 
   # Swaylock, dracula theme
-  - path: .config/swaylock
-    source: git
-    url: https://github.com/dracula/swaylock.git
-    branch: main # main is default
+  - path: .config/swaylock/config
+    url: https://raw.githubusercontent.com/dracula/swaylock/refs/heads/main/swaylock/config
+    source: external
+  - path: .config/swaylock/dracula-wallpaper.svg
+    url: https://raw.githubusercontent.com/dracula/swaylock/refs/heads/main/swaylock/dracula-wallpaper.svg
+    source: external
+
 
 #Example for External
 #  - path: .local/bin/custom-tool
