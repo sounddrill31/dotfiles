@@ -4,6 +4,8 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStartPre=/usr/bin/swww-daemon -q > /dev/null 2>&1
 ExecStart=/usr/bin/swww img "%h/Pictures/Background.gif"
 Restart=on-failure
+RestartSec=5s
+
+# Niri config starts swww-daemon on startup

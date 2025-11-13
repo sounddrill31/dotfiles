@@ -278,7 +278,7 @@ spawn-at-startup "swww-daemon"
 
 spawn-at-startup "waybar"
 
-spawn-at-startup "swww" "img" "~/Pictures/Background.gif"
+//spawn-at-startup "swww" "img" "~/Pictures/Background.gif"
 spawn-at-startup "cliphist" "wipe"
 
 //spawn-at-startup "swaybg" "-i" "~/Downloads/b227.jpg"// Wallpaper
