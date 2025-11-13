@@ -5,11 +5,11 @@
 
     // Module order
     "modules-left": [
+    "niri/workspaces",   // Workspaces
     "niri/window",
-    "custom/nowplaying" // Now playing (audio)
-      //  "sway/workspaces",   // Workspaces
+    "custom/nowplaying", // Now playing (audio)
       //  "custom/scratchpad", // Scratchpad status
-      //  "sway/mode"          // Sway mode
+     "niri/mode"          // Sway mode
     ],
 
 //    "modules-center": [
@@ -38,7 +38,7 @@
     ],
 
     "custom/clipboard": {
-        "format": "    ",  // Font Awesome icon
+        "format": "    ",
         "tooltip": "Clipboard manager",
         "on-click": "bash -c 'rofi -theme ~/sources/rofi/themes/DarkBlue.rasi -modi clipboard:~/scripts/cliphist/contrib/cliphist-rofi-img -show clipboard -show-icons" 
     },
@@ -52,11 +52,11 @@
 	},
 
 
-    "sway/mode": {
+    "niri/mode": {
         "format": " {}"
     },
 
-    "sway/workspaces": {
+    "niri/workspaces": {
         "all-outputs": false,
         "disable-scroll": true,
         "format": "{index} {icon}",
