@@ -4,11 +4,11 @@ Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty and 
 Yes, I use micro over nano, \*vi\*, emacs, etc.  
 
 > [!TIP]
-> Put wallpaper in `~/Pictures/Background.gif` (To change this, edit `~/.config/systemd/user/swww.service`). This repo also tries to download to the location, so syncing may reset your background back to the default image.
+> Put wallpaper in `~/Pictures/Background.png` (To change this, edit `~/.config/systemd/user/swaybg.service`). This repo also tries to download to the location, so syncing may reset your background back to the default image.
 
 
 > [!TIP]
-> If you edit  ~/.config/systemd/user/swww.service, remember to reload the rules with: `systemctl --user daemon-reload`
+> If you edit  ~/.config/systemd/user/swaybg.service, remember to reload the rules with: `systemctl --user daemon-reload`
 
 ## Preview
 
@@ -32,7 +32,7 @@ brightnessctl
 pamixer
 systemctl
 waybar
-swww
+swaybg
 xwayland-satellite
 firefox
 wl-paste

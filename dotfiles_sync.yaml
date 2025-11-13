@@ -15,15 +15,15 @@ files:
   - path: .config/gtk-4.0/settings.ini
 
   # Wallpaper
-  - path: Pictures/Background.gif
-    url: https://codeberg.org/LGFae/awww/media/branch/demos/assets/demo.gif
+  - path: Pictures/Background.png
+    url: https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/astronaut-nord.png
     source: external
     type: direct
-  - path: .config/systemd/user/swww.service
+  - path: .config/systemd/user/swaybg.service
     run-after:
-      - "systemctl --user add-wants niri.service swww.service"
+      - "systemctl --user add-wants niri.service swaybg.service"
       - "systemctl --user daemon-reload"
-      - "systemctl --user restart swww"
+      - "systemctl --user restart swaybg"
 
   # Autostart
   - path: .customrc
