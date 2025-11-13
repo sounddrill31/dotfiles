@@ -288,7 +288,7 @@ spawn-at-startup "bash" "-c" "mkfifo -m 600 /tmp/wobpipe 2>/dev/null; tail -f /t
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "nm-applet" "--indicator"
 //spawn-at-startup "sherlock --daemonize"
-spawn-at-startup  "rofi" "-drun-use-desktop-cache"  "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
+//spawn-at-startup  "rofi" "-drun-use-desktop-cache"  "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"
 //spawn-at-startup "xwayland-satellite" ":0"
 
 //spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
@@ -404,7 +404,7 @@ binds {
 
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     //Mod+Shift+D hotkey-overlay-title="Run an Application: Sherlock" { spawn "sherlock"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-drun-use-desktop-cache" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi"; }
+    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun" "-theme" "~/sources/rofi/themes/DarkBlue.rasi" "-show-icons"; }
     Mod+B hotkey-overlay-title="Run an Application: vivaldi" { spawn "flatpak" "run" "com.vivaldi.Vivaldi"; }
     Mod+Shift+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
 
