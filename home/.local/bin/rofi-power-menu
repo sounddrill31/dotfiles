@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chosen=$(printf "  Shutdown\n  Restart\n  Sleep" | rofi -dmenu -i -p "Power Menu")
+chosen=$(printf "  Shutdown\n  Restart\n  Sleep" | rofi -dmenu -i -p "Power Menu" -theme ~/sources/rofi/themes/DarkBlue.rasi -modi)
 
 case "$chosen" in
 	"  Shutdown") systemctl poweroff ;;
