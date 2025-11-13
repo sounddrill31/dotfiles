@@ -30,6 +30,7 @@ pkg-config
 wpctl
 brightnessctl
 pamixer
+playerctl
 systemctl
 waybar
 swaybg
