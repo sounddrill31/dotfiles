@@ -677,7 +677,7 @@ binds {
 	Mod+Ctrl+Shift+S { spawn "pkill" "sherlock"; }
 	Mod+Ctrl+Shift+R { spawn "pkill" "rofi"; }
 
-	Mod+Alt+T { spawn "telegram-desktop"; }
+	Mod+Alt+T { spawn "telegram"; }
 	Mod+Alt+D { spawn "discord"; }
 	Mod+Alt+W { spawn "whatsapp"; }
 	Mod+Alt+F { spawn "nautilus"; }
