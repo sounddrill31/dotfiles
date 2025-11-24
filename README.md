@@ -4,7 +4,10 @@ Finally, my personal dotfiles repository! Targeting Niri, Waybar, Alacritty and 
 Yes, I use micro over nano, \*vi\*, emacs, etc.  
 
 > [!TIP]
-> Put wallpaper in `~/Pictures/Background.png` (To change this, edit `~/.config/systemd/user/swaybg.service`). This repo also tries to download to the location, so syncing may reset your background back to the default image.
+> Put wallpaper in `~/Pictures/Background.png` (To change this, edit `~/.config/systemd/user/swaybg.service`). This repo also tries to download to the location, so syncing may reset your background back to the default image. Same Wallpaper is also used for swaylock so also edit ~/.config/swaylock/config
+
+> [!TIP]
+> Alternatively, just change the image and rename as-is
 
 
 > [!TIP]
@@ -34,6 +37,9 @@ playerctl
 systemctl
 waybar
 swaybg
+swaync
+swaylock
+swayidle
 xwayland-satellite
 firefox
 wl-paste
@@ -46,6 +52,10 @@ wob
 niri
 flatpak # for browser scripts
 ```
+
+> [!TIP]
+> Run the following after package installation
+> ```systemctl --user add-wants niri.service swaync.service```
 
 ### Python deps:
 (needed for sync.py)
@@ -93,6 +103,7 @@ python3 backup.py
 - Vivaldi, installed from flatpak
 - Firefox
 - Swaylock, swaybg
+- swaync for notifications 
 - Micro for text editing
 - Vivaldi mail and Evolution for Email
 - Telegram Desktop

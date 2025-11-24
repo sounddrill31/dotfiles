@@ -12,10 +12,12 @@
      "niri/mode"          // Sway mode
     ],
 
-//    "modules-center": [
+    "modules-center": [
 //        // "sway/window"        // App window title
 //        // "niri/window"
-//    ],
+        "custom/notification"
+
+    ],
 
     "modules-right": [
     	"idle_inhibitor",
@@ -33,8 +35,7 @@
         "pulseaudio",
         //"custom/layout",
         "clock",
-        "custom/power" //,
-        //"custom/notification"
+        "custom/power"
     ],
 
     "custom/clipboard": {
