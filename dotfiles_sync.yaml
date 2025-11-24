@@ -107,7 +107,7 @@ files:
       - "cd linux && pixi install"
 
   # Swaylock config
-  - path: .config/swaylock/config    # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/swaync 
+  - path: .config/swaylock/config    # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/swaylock
 
 
 #Example for External
