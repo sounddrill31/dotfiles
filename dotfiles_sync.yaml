@@ -109,6 +109,9 @@ files:
   # Swaylock config
   - path: .config/swaylock/config    # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/swaylock
 
+  # Swaync
+  - path: .config/swaync/style.css
+  - path: .config/swaync/config.json # based on default openSUSE config, https://github.com/openSUSE/openSUSEway/tree/0929d704066c72be15be415cfa759281e734d697/.config/swaync
 
 #Example for External
 #  - path: .local/bin/custom-tool
