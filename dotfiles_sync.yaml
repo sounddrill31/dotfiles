@@ -88,15 +88,15 @@ files:
     url: https://github.com/alacritty/alacritty-theme
     branch: master
 
-  # icons
-  - path: sources/cursors/Future-cursors
-    source: git
-    branch: master
-    url: https://github.com/yeyushengfan258/Future-cursors
-    idempotent: true
-    run-after:
-      - "bash build.sh"
-      - "bash install.sh"
+  # icons, we switched to adwaita for now
+  #- path: sources/cursors/Future-cursors
+  #  source: git
+  #  branch: master
+  #  url: https://github.com/yeyushengfan258/Future-cursors
+  #  idempotent: true
+  #  run-after:
+  #    - "bash build.sh"
+  #    - "bash install.sh"
 
   # wob
   - path: .config/wob/wob.ini
