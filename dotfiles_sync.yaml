@@ -89,10 +89,13 @@ files:
     branch: master
 
   # icons
-  - path: .local/share/icons/BreezeX-RosePineDawn-Linux
-    source: external
-    type: tarxz
-    url: https://github.com/rose-pine/cursor/releases/download/v1.1.0/BreezeX-RosePineDawn-Linux.tar.xz
+  - path: sources/cursors/Future-cursors
+    source: git
+    url: https://github.com/yeyushengfan258/Future-cursors
+    idempotent: true
+    run-after:
+      - "bash build.sh"
+      - "bash install.sh"
 
   # wob
   - path: .config/wob/wob.ini
