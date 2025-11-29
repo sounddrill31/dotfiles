@@ -91,6 +91,7 @@ files:
   # icons
   - path: sources/cursors/Future-cursors
     source: git
+    branch: master
     url: https://github.com/yeyushengfan258/Future-cursors
     idempotent: true
     run-after:
