@@ -1,5 +1,6 @@
 {
     "colorscheme": "simple",
     "keymenu": true,
-    "mkparents": true
+    "mkparents": true,
+    "softwrap": true
 }

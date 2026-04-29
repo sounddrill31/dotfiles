@@ -46,3 +46,19 @@ alias "sync-rc"="cd ~/dotfiles;git reset --hard; git pull; python3 sync.py"
 xrun() { labwc -s "$@"; }
 alias alice="cd ~/Projects/alice; xrun 'pixi run start'"
 alias 1hz="cd ~/Projects/pysmu/adalm1000/linux; pixi install; pixi run start"
+
+# https://discuss.kde.org/t/ibus-issue-with-wayland/3680/22
+# ~/.xinputrc
+
+# Detect session type (Wayland or X11)
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # For Wayland (KDE, GNOME, etc.), no need to force GTK_IM_MODULE or QT_IM_MODULE
+    export XMODIFIERS="@im=ibus"
+else
+    # For X11 (XFCE, MATE, LXDE, etc.), force compatibility
+    export GTK_IM_MODULE=ibus
+    export QT_IM_MODULE=ibus
+    export XMODIFIERS="@im=ibus"
+fi
+
+alias "usb-tethering"="sudo modprobe rndis_host"

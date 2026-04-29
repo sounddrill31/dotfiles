@@ -72,7 +72,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse max-scroll-amount="30%"
+    focus-follows-mouse max-scroll-amount="60%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -266,6 +266,7 @@ layout {
         top -5
         bottom -5
     }
+    
 }
 
 // Add lines like this to spawn processes at startup.
@@ -326,7 +327,12 @@ animations {
 // Make the swaybg wallpaper visible in the overview backdrop.
 layer-rule {
     match namespace="^wallpaper$"
-    place-within-backdrop true
+    //place-within-backdrop true
+    background-effect {
+        // xray true
+        // blur true
+    }
+
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -342,6 +348,30 @@ window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
+
+// Indicate screencasted windows with red colors.
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -446,7 +476,7 @@ binds {
     //Mod+Down  { focus-window-down; }
     Alt+Tab { focus-column-right; }
     //Mod+Tab { focus-column-right; }
-    Mod+Tab repeat=true { toggle-overview; }
+    Mod+Tab repeat=true cooldown-ms=150 { toggle-overview; }
     //Alt+Tab repeat=true { toggle-overview; }
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
@@ -531,20 +561,33 @@ binds {
     // To avoid scrolling through workspaces really fast, you can use
     // the cooldown-ms property. The bind will be rate-limited to this value.
     // You can set a cooldown on any bind, but it's most useful for the wheel.
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+    //Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    //Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-column-left; }
+    Mod+WheelScrollRight   	 cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollLeft      cooldown-ms=150 { focus-workspace-up; }
+
+
     Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
+    //Mod+WheelScrollRight      { focus-column-right; }
+    //Mod+WheelScrollLeft       { focus-column-left; }
     Mod+Ctrl+WheelScrollRight { move-column-right; }
     Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
     // horizontal scrolling; these binds replicate that.
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    //Mod+Shift+WheelScrollDown      { focus-column-right; }
+    //Mod+Shift+WheelScrollUp        { focus-column-left; }
+
+    Mod+Shift+WheelScrollDown      { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp        { focus-workspace-up; }
+
+
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
@@ -689,4 +732,12 @@ cursor {
     xcursor-size 24
     hide-when-typing
     hide-after-inactive-ms 1000
+}
+
+blur {
+    // off
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.5
 }
